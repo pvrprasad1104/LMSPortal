@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="card shadow-lg border-0 p-4 rounded-4">
+
+        <h2 class="mb-4 fw-bold">Submit Assignment</h2>
+
+        <div class="mb-4">
+            <h4>{{ assignment.title }}</h4>
+            <p>{{ assignment.description }}</p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">
+                    Upload File
+                </label>
+
+                <input 
+                    type="file" 
+                    name="file"
+                    class="form-control"
+                    required
+                >
+            </div>
+
+            <button class="btn btn-primary px-4">
+                Submit Assignment
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

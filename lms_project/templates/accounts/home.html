@@ -1,0 +1,514 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LMS Portal</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            background:#d9d7ff;
+            overflow-x:hidden;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar-custom{
+            padding:25px 80px;
+        }
+
+        .logo{
+            font-size:40px;
+            font-weight:700;
+            color:#2832c2;
+        }
+
+        .logo span{
+            color:#ff5c1b;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            color:#111827;
+            margin:0 20px;
+            font-size:18px;
+            font-weight:500;
+            transition:0.3s;
+        }
+
+        .nav-links a:hover{
+            color:#ff5c1b;
+        }
+
+        .enroll-btn{
+            background:#2832c2;
+            color:white;
+            border:none;
+            padding:12px 28px;
+            border-radius:10px;
+            font-weight:600;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero-section{
+            padding:40px 80px;
+        }
+
+        .login-card{
+            background:rgba(255,255,255,0.35);
+            backdrop-filter:blur(15px);
+            padding:40px;
+            border-radius:35px;
+            width:100%;
+            max-width:500px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .login-card h1{
+            font-size:42px;
+            font-weight:700;
+            color:#111827;
+            margin-bottom:10px;
+        }
+
+        .login-card p{
+            color:#4b5563;
+            margin-bottom:30px;
+        }
+
+        .form-control{
+            height:55px;
+            border-radius:12px;
+            border:none;
+            margin-bottom:18px;
+            padding-left:15px;
+        }
+
+        .form-control:focus{
+            box-shadow:none;
+            border:2px solid #2832c2;
+        }
+
+        .main-btn{
+            width:100%;
+            height:55px;
+            border:none;
+            border-radius:12px;
+            background:#ff5c1b;
+            color:white;
+            font-size:18px;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        .main-btn:hover{
+            background:#e64a12;
+        }
+
+        .switch-btns{
+            display:flex;
+            gap:10px;
+            margin-bottom:25px;
+        }
+
+        .switch-btns button{
+            flex:1;
+            height:50px;
+            border:none;
+            border-radius:12px;
+            font-weight:600;
+            background:#e5e7eb;
+        }
+
+        .switch-btns .active-btn{
+            background:#2832c2;
+            color:white;
+        }
+
+        .hero-image{
+    width:100%;
+    max-width:650px;
+    height:auto;
+    object-fit:contain;
+    background:transparent;
+    mix-blend-mode: multiply;
+}
+
+        @keyframes float{
+            0%{
+                transform:translateY(0);
+            }
+            50%{
+                transform:translateY(-10px);
+            }
+            100%{
+                transform:translateY(0);
+            }
+        }
+
+        .stats-box{
+            background:white;
+            padding:25px;
+            border-radius:25px;
+            display:flex;
+            align-items:center;
+            gap:20px;
+            width:400px;
+            position:absolute;
+            bottom:40px;
+            left:50px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .stats-icon{
+            width:70px;
+            height:70px;
+            background:#2832c2;
+            border-radius:15px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            color:white;
+            font-size:30px;
+        }
+
+        .stats-box h2{
+            margin:0;
+            font-size:42px;
+            font-weight:700;
+        }
+
+        .stats-box p{
+            margin:0;
+            color:#374151;
+        }
+
+        .right-side{
+            position:relative;
+        }
+
+        .small-text{
+            text-align:center;
+            margin-top:20px;
+            color:#374151;
+        }
+
+        .small-text a{
+            text-decoration:none;
+            font-weight:600;
+            color:#2832c2;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:992px){
+
+            .navbar-custom{
+                padding:20px;
+            }
+
+            .hero-section{
+                padding:20px;
+            }
+
+            .stats-box{
+                position:relative;
+                width:100%;
+                left:0;
+                bottom:0;
+                margin-top:20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+
+    <div class="container-fluid">
+
+        <div class="logo">
+            LMS<span>Pro</span>
+        </div>
+
+        <div class="nav-links d-none d-lg-block">
+            <a href="">Home</a>
+            <a href="">Courses</a>
+            <a href="">About</a>
+            <a href="">Contact</a>
+        </div>
+
+        <button class="enroll-btn">
+            Enroll Now
+        </button>
+
+    </div>
+
+</nav>
+
+<!-- ================= HERO SECTION ================= -->
+
+<div class="container-fluid hero-section">
+
+    <div class="row align-items-center">
+
+        <!-- ================= LEFT LOGIN CARD ================= -->
+
+        <div class="col-lg-5 mb-5">
+
+            <div class="login-card">
+
+                <h1>LMS Portal</h1>
+
+                <p>Learn • Practice • Grow Your Skills</p>
+
+                <!-- BUTTON SWITCH -->
+
+                <div class="switch-btns">
+
+                    <button id="studentBtn" class="active-btn">
+                        Student
+                    </button>
+
+                    <button id="adminBtn">
+                        Admin
+                    </button>
+
+                </div>
+
+                <!-- ================= STUDENT LOGIN ================= -->
+
+                <div id="studentSection">
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <input type="hidden" name="action" value="student_login">
+
+                        <input type="text"
+                               name="username"
+                               class="form-control"
+                               placeholder="Student Username"
+                               required>
+
+                        <input type="password"
+                               name="password"
+                               class="form-control"
+                               placeholder="Password"
+                               required>
+
+                        <button class="main-btn">
+                            Student Login
+                        </button>
+
+                    </form>
+
+                    <hr class="my-4">
+
+                    <!-- ================= STUDENT SIGNUP ================= -->
+
+                    <h4 class="mb-3">Create Student Account</h4>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <input type="hidden" name="action" value="student_signup">
+
+                        <input type="text"
+                               name="username"
+                               class="form-control"
+                               placeholder="Username"
+                               required>
+
+                        <input type="text"
+                               name="name"
+                               class="form-control"
+                               placeholder="Full Name"
+                               required>
+
+                        <input type="email"
+                               name="email"
+                               class="form-control"
+                               placeholder="Email"
+                               required>
+
+                        <input type="text"
+                               name="phone"
+                               class="form-control"
+                               placeholder="Phone"
+                               required>
+
+                        <input type="password"
+                               name="password"
+                               class="form-control"
+                               placeholder="Password"
+                               required>
+
+                        <button class="main-btn">
+                            Create Student Account
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <!-- ================= ADMIN SECTION ================= -->
+
+                <div id="adminSection" style="display:none;">
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <input type="hidden" name="action" value="admin_login">
+
+                        <input type="text"
+                               name="username"
+                               class="form-control"
+                               placeholder="Admin Username"
+                               required>
+
+                        <input type="password"
+                               name="password"
+                               class="form-control"
+                               placeholder="Password"
+                               required>
+
+                        <button class="main-btn">
+                            Admin Login
+                        </button>
+
+                    </form>
+
+                    <hr class="my-4">
+
+                    <h4 class="mb-3">Create Admin Account</h4>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <input type="hidden" name="action" value="admin_signup">
+
+                        <input type="text"
+                               name="username"
+                               class="form-control"
+                               placeholder="Admin Username"
+                               required>
+
+                        <input type="password"
+                               name="password"
+                               class="form-control"
+                               placeholder="Password"
+                               required>
+
+                        <button class="main-btn">
+                            Create Admin Account
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <div class="small-text">
+                    Learn smarter with our modern LMS platform 🚀
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= RIGHT SIDE ================= -->
+
+        <div class="col-lg-7 text-center right-side">
+
+        <img
+        src="https://img.freepik.com/free-photo/front-view-young-female-student-red-shirt-black-bag-using-laptop-white_140725-16641.jpg?semt=ais_hybrid&w=740&q=80"
+        class="hero-image">
+
+            <!-- <div class="stats-box">
+
+                <div class="stats-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <div>
+                    <h2>250K</h2>
+                    <p>Active Students Learning</p>
+                </div>
+
+            </div> -->
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+
+    let studentBtn = document.getElementById("studentBtn");
+    let adminBtn = document.getElementById("adminBtn");
+
+    let studentSection = document.getElementById("studentSection");
+    let adminSection = document.getElementById("adminSection");
+
+    studentBtn.onclick = function(){
+
+        studentBtn.classList.add("active-btn");
+        adminBtn.classList.remove("active-btn");
+
+        studentSection.style.display = "block";
+        adminSection.style.display = "none";
+    }
+
+    adminBtn.onclick = function(){
+
+        adminBtn.classList.add("active-btn");
+        studentBtn.classList.remove("active-btn");
+
+        studentSection.style.display = "none";
+        adminSection.style.display = "block";
+    }
+
+</script>
+
+</body>
+
+</html>

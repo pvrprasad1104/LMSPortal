@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+.quiz-box{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    max-width:800px;
+    margin:auto;
+}
+
+.timer{
+    background:#ef4444;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    font-weight:bold;
+    float:right;
+}
+
+.question{
+    margin-bottom:20px;
+    padding:15px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.submit-btn{
+    background:#2563eb;
+    color:white;
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    margin-top:20px;
+}
+</style>
+
+<div class="quiz-box">
+
+    <div>
+        <h2>{{ quiz.title }}</h2>
+
+        <div class="timer" id="timer">
+            Time Left: 05:00
+        </div>
+    </div>
+
+    <form method="POST" id="quizForm">
+        {% csrf_token %}
+
+        {% for question in questions %}
+
+        <div class="question">
+
+            <h4>{{ question.question_text }}</h4>
+
+            <label>
+                <input type="radio" name="{{ question.id }}" value="A">
+                {{ question.option1 }}
+            </label><br>
+
+            <label>
+                <input type="radio" name="{{ question.id }}" value="B">
+                {{ question.option2 }}
+            </label><br>
+
+            <label>
+                <input type="radio" name="{{ question.id }}" value="C">
+                {{ question.option3 }}
+            </label><br>
+
+            <label>
+                <input type="radio" name="{{ question.id }}" value="D">
+                {{ question.option4 }}
+            </label>
+
+        </div>
+
+        {% empty %}
+            <p>No questions found for this quiz.</p>
+        {% endfor %}
+
+        <button type="submit" class="submit-btn">
+            Submit Quiz
+        </button>
+
+    </form>
+
+</div>
+
+<script>
+let timeLeft = 300;
+let timer = document.getElementById("timer");
+let form = document.getElementById("quizForm");
+
+let countdown = setInterval(function(){
+
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+
+    timer.innerHTML =
+        "Time Left: " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+
+    timeLeft--;
+
+    if(timeLeft < 0){
+        clearInterval(countdown);
+        alert("Time's up! Submitting quiz...");
+        form.submit();
+    }
+
+}, 1000);
+</script>
+
+{% endblock %}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LMS Login</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+            background: linear-gradient(270deg, #141e30, #243b55, #1e3c72, #2a5298);
+            background-size: 800% 800%;
+            animation: gradientMove 15s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        /* Glass Card */
+        .box {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(18px);
+            padding: 45px;
+            border-radius: 20px;
+            text-align: center;
+            width: 360px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+            animation: fadeIn 1s ease, float 4s ease-in-out infinite;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: scale(0.9);}
+            to {opacity: 1; transform: scale(1);}
+        }
+
+        @keyframes float {
+            0% {transform: translateY(0);}
+            50% {transform: translateY(-10px);}
+            100% {transform: translateY(0);}
+        }
+
+        h2 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        p {
+            opacity: 0.85;
+            margin-bottom: 20px;
+        }
+
+        /* Buttons */
+        .btn-custom {
+            width: 100%;
+            margin: 10px 0;
+            border-radius: 25px;
+            font-weight: 600;
+            border: none;
+            padding: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #00c9ff, #92fe9d);
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #f7971e, #ffd200);
+            color: black;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>🎓 LMS Portal</h2>
+    <p>Login to continue</p>
+
+    <a href="/student_login/" class="btn btn-success btn-custom">👨‍🎓 Student Login</a>
+
+    <a href="/admin_login/" class="btn btn-warning btn-custom">🛠 Admin Login</a>
+
+    <a href="/signup/" class="btn btn-primary btn-custom">📝 Sign Up</a>
+
+</div>
+
+</body>
+</html>

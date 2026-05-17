@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Assignment</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+            background: linear-gradient(270deg, #141e30, #243b55, #1e3c72, #2a5298);
+            background-size: 800% 800%;
+            animation: gradientMove 15s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        /* Glass Card */
+        .box {
+            width: 420px;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(18px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+            animation: fadeIn 1s ease, float 4s ease-in-out infinite;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: scale(0.9);}
+            to {opacity: 1; transform: scale(1);}
+        }
+
+        @keyframes float {
+            0% {transform: translateY(0);}
+            50% {transform: translateY(-10px);}
+            100% {transform: translateY(0);}
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        /* Inputs */
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            transition: 0.3s;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #ddd;
+        }
+
+        select {
+            color: white;
+        }
+
+        option {
+            color: black;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            background: rgba(255,255,255,0.25);
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        textarea {
+            resize: none;
+            height: 90px;
+        }
+
+        /* Button */
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            background: linear-gradient(45deg, #00c9ff, #92fe9d);
+            color: black;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+
+        a {
+            color: #ddd;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-top: 12px;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            color: white;
+            text-shadow: 0 0 8px rgba(255,255,255,0.8);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>📝 Create Assignment</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="text" name="title" placeholder="Assignment Title" required>
+
+        <textarea name="description" placeholder="Assignment Description" required></textarea>
+
+        <select name="course" required>
+            <option value="">Select Course</option>
+            {% for c in courses %}
+                <option value="{{ c.id }}">{{ c.title }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="datetime-local" name="deadline" required>
+
+        <button type="submit">Create Assignment</button>
+    </form>
+
+</div>
+
+</body>
+</html>
+
+{% endblock %}

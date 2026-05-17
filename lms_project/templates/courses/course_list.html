@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+.course-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.course-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.course-card h2 {
+    margin-bottom: 15px;
+    color: #111827;
+}
+
+.course-card p {
+    color: #4b5563;
+    margin-bottom: 20px;
+}
+
+.enroll-btn {
+    background: #2563eb;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.enroll-btn:hover {
+    background: #1d4ed8;
+}
+
+</style>
+
+<h1 style="margin-bottom:30px;">📚 Available Courses</h1>
+
+<div class="course-container">
+
+    {% for course in courses %}
+
+        <div class="course-card">
+
+            <h2>{{ course.title }}</h2>
+
+            <p>{{ course.description }}</p>
+
+            <a href="/enroll_course/{{ course.id }}/" class="enroll-btn">
+                Enroll Now
+            </a>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

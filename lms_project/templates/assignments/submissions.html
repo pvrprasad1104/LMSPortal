@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submissions</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+            background: linear-gradient(270deg, #141e30, #243b55, #1e3c72, #2a5298);
+            background-size: 800% 800%;
+            animation: gradientMove 15s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        h1, h2 {
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+        }
+
+        /* FILTER BOX */
+        .filter-box {
+            background: rgba(255,255,255,0.08);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(15px);
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        select, input {
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            margin: 5px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        select option {
+            color: black;
+        }
+
+        input:focus, select:focus {
+            background: rgba(255,255,255,0.25);
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        /* BUTTON */
+        button, .btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        .btn-save {
+            background: linear-gradient(45deg, #00c9ff, #92fe9d);
+            color: black;
+        }
+
+        /* CARDS */
+        .card {
+            background: rgba(255,255,255,0.08);
+            padding: 18px;
+            margin: 18px 0;
+            border-radius: 15px;
+            backdrop-filter: blur(15px);
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .card:hover {
+            transform: translateY(-6px) scale(1.01);
+        }
+
+        /* LINKS */
+        a {
+            color: #60a5fa;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            text-shadow: 0 0 8px rgba(96,165,250,0.8);
+        }
+
+        .marks {
+            margin-top: 10px;
+        }
+
+        .marks p {
+            margin-top: 8px;
+        }
+
+        /* STATUS COLORS */
+        .graded {
+            color: #4ade80;
+            font-weight: 600;
+        }
+
+        .not-graded {
+            color: #f87171;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📥 Student Submissions</h1>
+
+    <!-- FILTER -->
+    <div class="filter-box">
+        <form method="GET">
+            <select name="assignment">
+                <option value="">All Assignments</option>
+                {% for a in assignments %}
+                    <option value="{{ a.id }}">{{ a.title }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+
+    <!-- SUBMISSIONS -->
+    {% for s in submissions %}
+    <div class="card">
+
+        <h3>{{ s.assignment.title }}</h3>
+
+        <p><b>Student:</b> {{ s.student.name }}</p>
+
+        {% if s.file %}
+            <a href="{{ s.file.url }}" target="_blank">📄 View Submission</a>
+        {% else %}
+            <p>No file uploaded</p>
+        {% endif %}
+
+        <div class="marks">
+            <form method="POST" action="/give_marks/{{ s.id }}/">
+                {% csrf_token %}
+
+                <input type="number" name="marks" value="{{ s.marks }}" placeholder="Marks">
+
+                <button class="btn btn-save" type="submit">Save</button>
+            </form>
+
+            <p>
+                Marks:
+                {% if s.marks %}
+                    <span class="graded">{{ s.marks }}</span>
+                {% else %}
+                    <span class="not-graded">Not graded</span>
+                {% endif %}
+            </p>
+        </div>
+
+        <a href="/give_marks/{{ s.id }}/">Open Grading Page</a>
+
+    </div>
+
+    {% empty %}
+        <p style="text-align:center;">No submissions found</p>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>
+{% endblock %}

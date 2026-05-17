@@ -1,0 +1,45 @@
+
+<div class="sidebar">
+
+    {% if request.session.admin_id %}
+
+        <h2>🛠 Admin</h2>
+
+        <a href="/admin_dashboard/">🏠 Dashboard</a>
+
+        <a href="/create_course/">📚 Create Course</a>
+
+        <a href="/create_quiz/">🧠 Create Quiz</a>
+
+        <a href="/add_question/">❓ Add Questions</a>
+
+        <a href="/create_assignment/">📝 Assignments</a>
+
+        <a href="/submissions/">📂 Submissions</a>
+
+        <a href="/profile/">👤 Profile</a>
+
+        <a href="/logout/">🚪 Logout</a>
+
+    {% else %}
+
+        <h2>🎓 Student</h2>
+
+        <a href="/dashboard/">🏠 Dashboard</a>
+
+        <a href="/quiz_list/">🧠 Quizzes</a>
+
+        <a href="/my_results/">📊 Results</a>
+
+        <a href="/dashboard/">📚 Courses</a>
+
+        <a href="/dashboard/">📝 Assignments</a>
+
+        <a href="/profile/">👤 Profile</a>
+
+        <a href="/logout/">🚪 Logout</a>
+
+    {% endif %}
+
+</div>
+

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+.form-box{
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    max-width:800px;
+}
+
+.form-box h2{
+    margin-bottom:30px;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-control{
+    padding:12px;
+    border-radius:10px;
+}
+
+.save-btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:10px;
+    font-size:18px;
+}
+
+.save-btn:hover{
+    background:#1d4ed8;
+}
+
+</style>
+
+<div class="form-box">
+
+    <h2>Update Profile</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label>Bio</label>
+            <textarea name="bio" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Address</label>
+            <textarea name="address" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>City</label>
+            <input type="text" name="city" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>State</label>
+            <input type="text" name="state" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Pincode</label>
+            <input type="text" name="pincode" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Country</label>
+            <input type="text" name="country" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Profile Picture</label>
+            <input type="file" name="profile_pic" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Resume (PDF)</label>
+            <input type="file" name="resume" class="form-control">
+        </div>
+
+        <button type="submit" class="save-btn">
+            Save Profile
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

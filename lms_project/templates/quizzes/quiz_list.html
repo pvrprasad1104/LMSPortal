@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card-box">
+
+    <h2>🧠 Available Quizzes</h2>
+
+    <hr>
+
+    {% for quiz in quizzes %}
+
+        <h5>{{ quiz.title }}</h5>
+
+        <p>{{ quiz.description }}</p>
+
+        <a href="/take_quiz/{{ quiz.id }}/"
+           class="btn-custom">
+           Take Quiz
+        </a>
+
+        <hr>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
